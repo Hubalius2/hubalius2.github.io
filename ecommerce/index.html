@@ -17,7 +17,67 @@
 
 
     <!--Place DTM header above this-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border - box;
+        }
 
+        body {
+            font-family: Arial, sans - serif;
+            line-height: 1.5;
+        }
+
+        /* Cookie banner styles */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4f4f4;
+            border-top: 1px solid #ccc;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 - 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-banner p {
+            flex: 1;
+            margin-right: 20px;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .accept {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .reject {
+            background-color: #f44336;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
 
     <script>
         var digitalData = digitalData || {};
@@ -32,6 +92,33 @@
                 loginStatus: "anonimo",
             },
         };
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const banner = document.getElementById("cookie-banner");
+            const acceptButton = document.getElementById("accept-cookies");
+            const rejectButton = document.getElementById("reject-cookies");
+
+            // Check if user has already made a choice
+            const cookiePreference = localStorage.getItem("cookiePreference");
+            if (cookiePreference) {
+                banner.style.display = "none"; // Hide banner if choice already made
+            }
+
+            // Event listeners for buttons
+            acceptButton.addEventListener("click", () => {
+                localStorage.setItem("cookiePreference", "accepted");
+                banner.style.display = "none";
+                console.log("Cookies accepted");
+            });
+
+            rejectButton.addEventListener("click", () => {
+                localStorage.setItem("cookiePreference", "rejected");
+                banner.style.display = "none";
+                console.log("Cookies rejected");
+            });
+        });
     </script>
 
     <title>Geometrixx Clothiers</title>
@@ -65,7 +152,15 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
+    <div id="cookie-banner" class="cookie-banner">
+        <p>
+            Utilizamos cookies para mejorar tu experiencia. Puedes aceptar o rechazar el uso de cookies no esenciales.
+        </p>
+        <div class="button-container">
+            <button id="accept-cookies" class="accept">Aceptar</button>
+            <button id="reject-cookies" class="reject">Rechazar</button>
+        </div>
+    </div>
     <div id="superwrap">
         <div id="wrapper">
             <!--start logo and head-->
