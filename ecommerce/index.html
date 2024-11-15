@@ -102,10 +102,11 @@
 
             // Check if user has already made a choice
             const cookiePreference = localStorage.getItem("cookiePreference");
+            /*
             if (cookiePreference) {
                 banner.style.display = "none"; // Hide banner if choice already made
             }
-
+            */
             // Event listeners for buttons
             acceptButton.addEventListener("click", () => {
                 localStorage.setItem("cookiePreference", "accepted");
